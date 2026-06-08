@@ -1,0 +1,215 @@
+use bubatag
+
+db.createCollection("usuarios")
+
+// Modelo de inserção inicial de um usuário com 1 coleira e 1 búfalo
+
+db.usuarios.insertOne({
+  nome: "Vinícius de Souza Camargo Costa",
+  email: "Vinicius@gmail.com",
+  senha: "1234",
+  CCIR: "1234567891234",
+  ativo: true,
+  coleiras: [
+    {
+      _id: ObjectId(),
+      n_coleira: "1",
+      coleira_localizacao: "Pasto A",
+      IP: "10.12.27.30",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        nome: "José",
+        raca: "Murrah",
+        n_etiqueta: "CVX12",
+        dt_nasc: ISODate("2024-10-12"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [
+          { _id: ObjectId(), batimento_cardiaco: 72, temperatura: 38.5, ativo: true, data: new Date() }
+        ],
+        historico_estresse: [
+          { _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }
+        ],
+        localizacao: [
+          {
+            _id: ObjectId(),
+            latitude: "-23.563210",
+            longitude: "-46.654321",
+            ativo: true
+          }
+        ]
+      }
+    }
+  ]
+})
+
+
+// Adicionar nova coleira com um búfalo a um usuário existente
+
+db.usuarios.updateOne(
+  { _id: ObjectId("6529871f2d3e4a6b12345678") }, //id do usuário
+  {
+    $push: {
+      coleiras: {
+        _id: ObjectId(),
+        n_coleira: "2",
+        coleira_localizacao: "Pasto B",
+        IP: "10.12.27.40",
+        ativo: true,
+        bubalino: {
+          _id: ObjectId(),
+          nome: "Lorré",
+          raca: "Murrah",
+          n_etiqueta: "DCV14",
+          dt_nasc: ISODate("2023-05-10"),
+          sexo: "Masculino",
+          ativo: true,
+          dados: [],
+          historico_estresse: []
+        }
+      }
+    }
+  }
+)
+
+// Adicionar multiplas coleiras sem búfalos
+
+db.usuarios.updateOne(
+  { _id: ObjectId("6529871f2d3e4a6b12345678") },
+  {
+    $push: {
+      coleiras: {
+        $each: [
+          {
+            _id: ObjectId(),
+            n_coleira: "4",
+            coleira_localizacao: "Pasto D",
+            IP: "192.168.0.50",
+            ativo: true
+          },
+          {
+            _id: ObjectId(),
+            n_coleira: "5",
+            coleira_localizacao: "Pasto E",
+            IP: "192.168.0.51",
+            ativo: true
+          },
+          {
+            _id: ObjectId(),
+            n_coleira: "6",
+            coleira_localizacao: "Pasto F",
+            IP: "192.168.0.52",
+            ativo: true
+          }
+        ]
+      }
+    }
+  }
+)
+
+
+// Adicionar búfalo a uma coleira existente
+
+db.usuarios.updateOne(
+  { "coleiras.n_coleira": "5" },
+  {
+    $set: {
+      "coleiras.$.bubalino": {
+        _id: ObjectId(),
+        nome: "Zé Pequeno",
+        raca: "Murrah",
+        n_etiqueta: "XPZ22",
+        dt_nasc: ISODate("2024-07-15"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [],
+        historico_estresse: []
+      }
+    }
+  }
+)
+
+
+// desativar coleira (soft delete)
+
+db.usuarios.updateOne(
+  { "coleiras.n_coleira": "6" },
+  {
+    $set: { "coleiras.$.ativo": false }
+  }
+)
+
+// Atualização de dados da coleira
+
+db.usuarios.updateOne(
+  { "coleiras.n_coleira": "1" },
+  {
+    $set: {
+      "coleiras.$.IP": "10.12.27.99" // Atualizando o IP da coleira
+    }
+  }
+)
+
+
+// Atualização de dados do búfalo
+
+db.usuarios.updateOne(
+  { "coleiras.n_coleira": "1" },
+  {
+    $set: {
+      "coleiras.$.bubalino.nome": "José Atualizado",
+      "coleiras.$.bubalino.raca": "Murrah Puro"
+    }
+  }
+)
+
+// Remover búfalo (desativar, soft delete)
+
+db.usuarios.updateOne(
+  { "coleiras.n_coleira": "3" },
+  {
+    $set: {
+      "coleiras.$.bubalino.ativo": false
+    }
+  }
+)
+
+// Atualização de dados coletados da coleira 
+
+db.usuarios.updateOne(
+  { "coleiras.n_coleira": "1" },
+  {
+    $push: {
+      "coleiras.$.bubalino.dados": {
+        _id: ObjectId(),
+        batimento_cardiaco: 80,
+        temperatura: 39.1,
+        ativo: true,
+        data: new Date()
+      }
+    }
+  }
+)
+
+// Inserção de dados de estresse
+
+db.usuarios.updateOne(
+  { "coleiras.n_coleira": "1" },
+  {
+    $push: {
+      "coleiras.$.bubalino.historico_estresse": {
+        _id: ObjectId(),
+        estado_estresse: "Estressado",
+        data_estresse: new Date(),
+        ativo: true
+      }
+    }
+  }
+)
+
+
+
+// consulta geral
+
+db.usuarios.find().pretty()

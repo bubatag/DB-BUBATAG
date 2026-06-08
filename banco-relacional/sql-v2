@@ -1,0 +1,14 @@
+create table if not exist `usuarios` (
+    `idusuario` int(11) not null AUTO_INCREMENT,
+    `nome` varchar(255) default null,
+    `email` varchar(255), default null,
+    `senha` varchar(255) default null,
+    `CCIR` varchar(13) default null,
+    PRIMARY KEY (`idusuario`),
+    UNIQUE KEY `email` (`email`),
+    UNIQUE KEY `CCIR` (`CCIR`)
+)   ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET =utf8mb4 COLLATE=utf8mb4_general_ci;
+
+create table if not exist `coleiras` (
+    ``idcoleira` int(11) NOT NULL
+)

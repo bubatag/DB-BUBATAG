@@ -1,0 +1,85 @@
+CREATE DATABASE if NOT EXISTS `bubatag`
+
+USE `bubatag`
+
+DROP DATABASE `bubatag`
+
+CREATE TABLE if NOT EXISTS `usuarios` (
+    `idusuario` int NOT NULL AUTO_INCREMENT,
+    `nome` varchar(255) DEFAULT NULL,
+    `email` varchar(255) DEFAULT NULL,
+    `senha` varchar(255) DEFAULT NULL,
+    `CCIR` varchar(13) DEFAULT NULL,
+    `ativo` BOOLEAN NOT NULL DEFAULT 1,
+    PRIMARY KEY (`idusuario`),
+    UNIQUE KEY `email` (`email`),
+    UNIQUE KEY `CCIR` (`CCIR`)
+)   ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET =utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE if NOT EXISTS `coleiras` (
+	`idcoleira`  INT NOT NULL AUTO_INCREMENT,
+	`n_coleira` VARCHAR(4) DEFAULT NULL,
+	`coleira_localizacao` VARCHAR(25) DEFAULT NULL,
+	`IP` VARCHAR(15) DEFAULT NULL,
+	`ativo` BOOLEAN NOT NULL DEFAULT 1,
+	`idusuario` INT DEFAULT NULL,
+	PRIMARY KEY (`idcoleira`),
+	KEY `idusuario` (`idusuario`),
+	CONSTRAINT `coleiras_ibfk_1` FOREIGN KEY(`idusuario`) REFERENCES `usuarios` (`idusuario`)	
+)  ENGINE=INNODB AUTO_INCREMENT=7 DEFAULT CHARSET=UTF8MB4 COLLATE=UTF8MB4_GENERAL_CI;
+
+CREATE TABLE if NOT EXISTS `bubalinos` (
+	`idbubalino` INT NOT NULL AUTO_INCREMENT,
+	`nome` VARCHAR(255) DEFAULT NULL,
+	`raca` VARCHAR(255) DEFAULT NULL,
+	`n_etiqueta` VARCHAR(5) DEFAULT NULL,
+	`dt_nasc`  date DEFAULT NULL,
+	`sexo` VARCHAR(9) DEFAULT NULL,
+	`ativo` BOOLEAN NOT NULL DEFAULT 1,
+	`idcoleira` INT DEFAULT NULL,
+	`idusuario` INT DEFAULT NULL,
+	PRIMARY KEY (`idbubalino`),
+	KEY `idcoleira` (`idcoleira`),
+	KEY `idusuario` (`idusuario`),
+	CONSTRAINT `bubalinos_ibfk_1` FOREIGN KEY (`idcoleira`) REFERENCES `coleiras` (`idcoleira`),
+	CONSTRAINT `bubalinos_ibfk_2` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`)
+)  ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
+
+CREATE TABLE if NOT EXISTS `dados` (
+	`iddados` INT NOT NULL AUTO_INCREMENT,
+	`batimento_cardiaco` INT DEFAULT NULL,
+	`temperatura` FLOAT(10,2) DEFAULT NULL,
+	`ativo` BOOLEAN NOT NULL DEFAULT 1,
+	`idbubalino` INT DEFAULT NULL,
+	`idcoleira` INT DEFAULT NULL,
+	PRIMARY KEY (`iddados`),
+	KEY `idcoleira` (`idcoleira`),
+	KEY `idbubalino` (`idbubalino`),
+	CONSTRAINT `dados_ibfk_1` FOREIGN KEY (`idcoleira`) REFERENCES `coleiras` (`idcoleira`),
+	CONSTRAINT `dados_ibfk_2` FOREIGN KEY (`idbubalino`) REFERENCES `bubalinos` (`idbubalino`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
+
+CREATE TABLE IF NOT EXISTS `localizacao` (
+  `idlocalizacao` int NOT NULL AUTO_INCREMENT,
+  `idbubalino` int DEFAULT 0,
+  `idcoleira` int DEFAULT 0,
+  `ativo` BOOLEAN NOT NULL DEFAULT 1,
+  `latitude` varchar DEFAULT '0',
+  `longitude` varchar DEFAULT '0',
+  PRIMARY KEY (`idlocalizacao`),
+  KEY `fk_localizacao_bubalinos` (`idbubalino`),
+  KEY `fk_localizacao_coleira` (`idcoleira`),
+  CONSTRAINT `fk_localizacao_bubalinos` FOREIGN KEY (`idbubalino`) REFERENCES `bubalinos` (`idbubalino`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `fk_localizacao_coleira` FOREIGN KEY (`idcoleira`) REFERENCES `coleiras` (`idcoleira`) ON DELETE SET NULL ON UPDATE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE if NOT EXISTS `historico_estresse` (
+	`idhistorico_estresse` INT NOT NULL AUTO_INCREMENT,
+	`estado_estresse` VARCHAR(50) DEFAULT NULL,
+	`data_estresse` DATETIME DEFAULT CURRENT_TIMESTAMP(),
+	`ativo` BOOLEAN NOT NULL DEFAULT 1,
+	`idbubalino` INT NOT NULL,
+	PRIMARY KEY (`idhistorico_estresse`),
+	KEY `idbubalino` (`idbubalino`),
+	CONSTRAINT `historico_estresse_ibfk_1` FOREIGN KEY (`idbubalino`) REFERENCES `bubalinos` (`idbubalino`)
+)	 ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;

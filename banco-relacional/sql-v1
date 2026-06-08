@@ -1,0 +1,153 @@
+CREATE DATABASE bubatag
+USE bubatag
+
+DROP DATABASE bubatag
+
+CREATE TABLE usuarios(
+idusuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(255),
+email VARCHAR(255) UNIQUE,
+senha VARCHAR(255),
+CCIR VARCHAR(13)
+)
+
+CREATE TABLE coleiras(
+idcoleira INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+n_coleira VARCHAR(4),
+IP VARCHAR(15),
+idusuario INT NOT NULL,
+FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario)
+)
+
+CREATE TABLE bubalinos(
+idbubalino INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(255),
+raca VARCHAR (255),
+n_etiqueta VARCHAR(5),
+idade VARCHAR(50),
+sexo VARCHAR(9),
+coleira VARCHAR(5),
+idcoleira INT NOT NULL,
+idusuario INT NOT NULL,
+FOREIGN KEY (idcoleira) REFERENCES coleiras (idcoleira),
+FOREIGN KEY (idusuario) REFERENCES usuarios (idusuario)
+)
+
+CREATE TABLE dados (
+iddados INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+batimento_cardiaco INT,
+temperatura VARCHAR(5),
+idbubalino INT NOT NULL,
+idcoleira INT NOT NULL,
+FOREIGN KEY (idcoleira) REFERENCES coleiras (idcoleira),
+FOREIGN KEY (idbubalino) REFERENCES bubalinos (idbubalino)
+)
+
+CREATE TABLE historico_estresse(
+idhistorico_estresse INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+estado_estresse VARCHAR(50),
+data_estresse datetime DEFAULT CURRENT_TIMESTAMP,
+idbubalino INT NOT NULL,
+FOREIGN KEY (idbubalino) REFERENCES bubalinos (idbubalino)
+)
+
+INSERT INTO usuarios(nome,email,senha,CCIR) VALUES
+("VInícius de Souza Camargo Costa","Vinicius@gmail.com","1234","1234567891234"),
+("João","joao@gmail.com","4321","7256812345679"),
+("Carlos Eduardo","Carloa@gmail.com","4567","3610984631462"),
+("Fukunaga","Fuku@gmail.com","3578","4211382109478"),
+("Cristhian","Cristhian@gmail.com","5681","1924812098234")
+
+SELECT * FROM usuarios
+
+INSERT INTO coleiras(n_coleira,IP,idusuario) VALUES
+("1","10.12.27.30",1),
+("2","10.12.27.40",1),
+("3","192.168.0.30",2),
+("4","132.147.110.20",3),
+("5","35.67.56.12",4),
+("6","45.67.110.12",5)
+
+SELECT * FROM coleiras  WHERE idusuario = 1
+
+INSERT INTO bubalinos(nome,raca,n_etiqueta,idade,sexo,coleira,idcoleira,idusuario) VALUES 
+("josé","Murrah","CVX12","4 semanas","Masculino","1",1,1),
+("Lorré","Murrah","DCV14","67 semanas","Masculino","2",2,1),
+("Mané","Murrah","TGZ32","78 semanas","Masculino","3",3,2),
+("Fubá","Murrah","CBF56","89 semanas","Feminino","4",4,3),
+("feio","Murrah","FGT76","110 semanas","Masculino","5",5,4),
+("Mana","Murrah","HJS76","12 semanas","Feminino","6",6,5)
+
+SELECT * FROM bubalinos  WHERE idusuario = 1
+
+INSERT INTO dados(batimento_cardiaco,temperatura,idbubalino,idcoleira) VALUES
+("34","45,30",1,1),
+("110","56,70",2,2),
+("45","34,60",3,3),
+("45","89,50",4,4),
+("23","45",5,5),
+("67","12",6,6)
+
+SELECT * FROM dados 
+
+INSERT INTO historico_estresse(estado_estresse,idbubalino) VALUES 
+("Ocioso",1),
+("Ok",2),
+("Estressado",3),
+("Estressado",4),
+("ok",5),
+("Ocioso",6)
+
+	
+	
+	SELECT 
+    u.idusuario, 
+    u.nome AS nome_usuario, 
+    u.email, 
+    u.CCIR,
+    
+    c.idcoleira, 
+    c.n_coleira, 
+    c.IP AS ip_coleira,
+    
+    b.idbubalino, 
+    b.nome AS nome_bubalino, 
+    b.raca, 
+    b.n_etiqueta, 
+    b.idade, 
+    b.sexo, 
+    b.coleira AS coleira_bubalino,
+    
+    d.iddados, 
+    d.batimento_cardiaco, 
+    d.temperatura,
+    
+    he.idhistorico_estresse, 
+    he.estado_estresse, 
+    he.data_estresse
+
+FROM  
+    usuarios u 
+INNER JOIN 
+    coleiras c ON u.idusuario = c.idusuario
+INNER JOIN 
+    bubalinos b ON c.idcoleira = b.idcoleira AND u.idusuario = b.idusuario
+INNER JOIN 
+    dados d ON b.idbubalino = d.idbubalino AND c.idcoleira = d.idcoleira
+INNER JOIN 
+    historico_estresse he ON b.idbubalino = he.idbubalino;
+    
+ 
+   /             Pesquisa da tela inicial                   /
+
+SELECT b.idbubalino,b.n_etiqueta, b.coleira,h.estado_estresse FROM usuarios u 
+ INNER JOIN 
+  bubalinos b ON b.idusuario = u.idusuario
+ INNER JOIN 
+  historico_estresse h ON h.idbubalino = b.idbubalino 
+WHERE u.idusuario = 1;
+  
+  
+  
+
+  
