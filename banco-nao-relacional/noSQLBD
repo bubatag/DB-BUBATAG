@@ -1,215 +1,911 @@
 use bubatag
 
-db.createCollection("usuarios")
-
-// Modelo de inserção inicial de um usuário com 1 coleira e 1 búfalo
-
 db.usuarios.insertOne({
   nome: "Vinícius de Souza Camargo Costa",
-  email: "Vinicius@gmail.com",
-  senha: "1234",
+  email: "vinicius.costa@bubatag.com",
+  senha: "hash_senha_segura_123",
   CCIR: "1234567891234",
   ativo: true,
   coleiras: [
     {
       _id: ObjectId(),
-      n_coleira: "1",
+      n_coleira: "COL-001",
       coleira_localizacao: "Pasto A",
-      IP: "10.12.27.30",
+      IP: "10.12.27.101",
       ativo: true,
       bubalino: {
         _id: ObjectId(),
-        nome: "José",
         raca: "Murrah",
-        n_etiqueta: "CVX12",
-        dt_nasc: ISODate("2024-10-12"),
+        n_etiqueta: "BUF-001",
+        dt_nasc: ISODate("2023-01-15"),
         sexo: "Masculino",
         ativo: true,
-        dados: [
-          { _id: ObjectId(), batimento_cardiaco: 72, temperatura: 38.5, ativo: true, data: new Date() }
-        ],
-        historico_estresse: [
-          { _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }
-        ],
-        localizacao: [
-          {
-            _id: ObjectId(),
-            latitude: "-23.563210",
-            longitude: "-46.654321",
-            ativo: true
-          }
-        ]
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 72, temperatura: 38.5, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.492101", longitude: "-47.845101", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-002",
+      coleira_localizacao: "Pasto B",
+      IP: "10.12.27.102",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Mediterrâneo",
+        n_etiqueta: "BUF-002",
+        dt_nasc: ISODate("2022-06-20"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 68, temperatura: 38.3, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.493202", longitude: "-47.846202", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-003",
+      coleira_localizacao: "Pasto C",
+      IP: "10.12.27.103",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Jafarabadi",
+        n_etiqueta: "BUF-003",
+        dt_nasc: ISODate("2023-03-10"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 75, temperatura: 38.8, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Alerta", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.494303", longitude: "-47.847303", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-004",
+      coleira_localizacao: "Pasto A",
+      IP: "10.12.27.104",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Carabao",
+        n_etiqueta: "BUF-004",
+        dt_nasc: ISODate("2021-11-05"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 70, temperatura: 38.4, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.495404", longitude: "-47.848404", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-005",
+      coleira_localizacao: "Pasto D",
+      IP: "10.12.27.105",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-005",
+        dt_nasc: ISODate("2024-02-18"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 82, temperatura: 39.2, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Estressado", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.496505", longitude: "-47.849505", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-006",
+      coleira_localizacao: "Pasto B",
+      IP: "10.12.27.106",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Mediterrâneo",
+        n_etiqueta: "BUF-006",
+        dt_nasc: ISODate("2022-09-12"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 69, temperatura: 38.6, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.497606", longitude: "-47.850606", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-007",
+      coleira_localizacao: "Pasto C",
+      IP: "10.12.27.107",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-007",
+        dt_nasc: ISODate("2023-07-22"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 74, temperatura: 38.7, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.498707", longitude: "-47.851707", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-008",
+      coleira_localizacao: "Pasto E",
+      IP: "10.12.27.108",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Jafarabadi",
+        n_etiqueta: "BUF-008",
+        dt_nasc: ISODate("2023-12-01"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 71, temperatura: 38.4, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.499808", longitude: "-47.852808", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-009",
+      coleira_localizacao: "Pasto A",
+      IP: "10.12.27.109",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-009",
+        dt_nasc: ISODate("2024-04-14"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 78, temperatura: 38.9, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Alerta", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.500909", longitude: "-47.853909", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-010",
+      coleira_localizacao: "Pasto B",
+      IP: "10.12.27.110",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Mediterrâneo",
+        n_etiqueta: "BUF-010",
+        dt_nasc: ISODate("2022-08-30"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 67, temperatura: 38.2, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.502010", longitude: "-47.855010", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-011",
+      coleira_localizacao: "Pasto D",
+      IP: "10.12.27.111",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-011",
+        dt_nasc: ISODate("2023-09-05"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 73, temperatura: 38.6, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.503111", longitude: "-47.856111", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-012",
+      coleira_localizacao: "Pasto F",
+      IP: "10.12.27.112",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Carabao",
+        n_etiqueta: "BUF-012",
+        dt_nasc: ISODate("2021-04-19"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 76, temperatura: 38.7, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.504212", longitude: "-47.857212", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-013",
+      coleira_localizacao: "Pasto C",
+      IP: "10.12.27.113",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Jafarabadi",
+        n_etiqueta: "BUF-013",
+        dt_nasc: ISODate("2023-10-10"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 70, temperatura: 38.5, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.505313", longitude: "-47.858313", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-014",
+      coleira_localizacao: "Pasto E",
+      IP: "10.12.27.114",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-014",
+        dt_nasc: ISODate("2022-12-25"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 69, temperatura: 38.3, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.506414", longitude: "-47.859414", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-015",
+      coleira_localizacao: "Pasto A",
+      IP: "10.12.27.115",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Mediterrâneo",
+        n_etiqueta: "BUF-015",
+        dt_nasc: ISODate("2024-01-08"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 81, temperatura: 39.0, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Alerta", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.507515", longitude: "-47.860515", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-016",
+      coleira_localizacao: "Pasto B",
+      IP: "10.12.27.116",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-016",
+        dt_nasc: ISODate("2023-05-18"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 72, temperatura: 38.6, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.508616", longitude: "-47.861616", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-017",
+      coleira_localizacao: "Pasto D",
+      IP: "10.12.27.117",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Jafarabadi",
+        n_etiqueta: "BUF-017",
+        dt_nasc: ISODate("2023-11-20"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 75, temperatura: 38.8, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.509717", longitude: "-47.862717", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-018",
+      coleira_localizacao: "Pasto C",
+      IP: "10.12.27.118",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Carabao",
+        n_etiqueta: "BUF-018",
+        dt_nasc: ISODate("2022-04-03"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 71, temperatura: 38.4, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.510818", longitude: "-47.863818", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-019",
+      coleira_localizacao: "Pasto A",
+      IP: "10.12.27.119",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-019",
+        dt_nasc: ISODate("2024-03-30"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 79, temperatura: 39.1, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Estressado", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.511919", longitude: "-47.864919", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-020",
+      coleira_localizacao: "Pasto F",
+      IP: "10.12.27.120",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Mediterrâneo",
+        n_etiqueta: "BUF-020",
+        dt_nasc: ISODate("2023-02-14"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 68, temperatura: 38.2, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.513020", longitude: "-47.866020", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-021",
+      coleira_localizacao: "Pasto B",
+      IP: "10.12.27.121",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-021",
+        dt_nasc: ISODate("2023-08-19"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 73, temperatura: 38.5, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.514121", longitude: "-47.867121", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-022",
+      coleira_localizacao: "Pasto E",
+      IP: "10.12.27.122",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Jafarabadi",
+        n_etiqueta: "BUF-022",
+        dt_nasc: ISODate("2022-10-09"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 70, temperatura: 38.4, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.515222", longitude: "-47.868222", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-023",
+      coleira_localizacao: "Pasto D",
+      IP: "10.12.27.123",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-023",
+        dt_nasc: ISODate("2024-05-02"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 80, temperatura: 39.0, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Alerta", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.516323", longitude: "-47.869323", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-024",
+      coleira_localizacao: "Pasto C",
+      IP: "10.12.27.124",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Carabao",
+        n_etiqueta: "BUF-024",
+        dt_nasc: ISODate("2021-07-28"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 74, temperatura: 38.6, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.517424", longitude: "-47.870424", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-025",
+      coleira_localizacao: "Pasto A",
+      IP: "10.12.27.125",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Mediterrâneo",
+        n_etiqueta: "BUF-025",
+        dt_nasc: ISODate("2023-04-11"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 71, temperatura: 38.5, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.518525", longitude: "-47.871525", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-026",
+      coleira_localizacao: "Pasto B",
+      IP: "10.12.27.126",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-026",
+        dt_nasc: ISODate("2022-11-16"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 69, temperatura: 38.3, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.519626", longitude: "-47.872626", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-027",
+      coleira_localizacao: "Pasto E",
+      IP: "10.12.27.127",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Jafarabadi",
+        n_etiqueta: "BUF-027",
+        dt_nasc: ISODate("2023-06-27"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 76, temperatura: 38.8, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Alerta", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.520727", longitude: "-47.873727", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-028",
+      coleira_localizacao: "Pasto F",
+      IP: "10.12.27.128",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-028",
+        dt_nasc: ISODate("2024-02-09"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 73, temperatura: 38.6, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.521828", longitude: "-47.874828", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-029",
+      coleira_localizacao: "Pasto D",
+      IP: "10.12.27.129",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Carabao",
+        n_etiqueta: "BUF-029",
+        dt_nasc: ISODate("2022-01-21"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 78, temperatura: 38.9, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Estressado", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.522929", longitude: "-47.875929", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-030",
+      coleira_localizacao: "Pasto C",
+      IP: "10.12.27.130",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Mediterrâneo",
+        n_etiqueta: "BUF-030",
+        dt_nasc: ISODate("2023-09-14"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 68, temperatura: 38.2, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.524030", longitude: "-47.877030", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-031",
+      coleira_localizacao: "Pasto A",
+      IP: "10.12.27.131",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-031",
+        dt_nasc: ISODate("2024-06-11"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 75, temperatura: 38.7, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.525131", longitude: "-47.878131", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-032",
+      coleira_localizacao: "Pasto B",
+      IP: "10.12.27.132",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Jafarabadi",
+        n_etiqueta: "BUF-032",
+        dt_nasc: ISODate("2022-05-17"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 70, temperatura: 38.4, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.526232", longitude: "-47.879232", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-033",
+      coleira_localizacao: "Pasto E",
+      IP: "10.12.27.133",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-033",
+        dt_nasc: ISODate("2023-10-04"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 82, temperatura: 39.3, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Estressado", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.527333", longitude: "-47.880333", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-034",
+      coleira_localizacao: "Pasto F",
+      IP: "10.12.27.134",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Mediterrâneo",
+        n_etiqueta: "BUF-034",
+        dt_nasc: ISODate("2023-01-28"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 69, temperatura: 38.3, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.528434", longitude: "-47.881434", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-035",
+      coleira_localizacao: "Pasto D",
+      IP: "10.12.27.135",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Carabao",
+        n_etiqueta: "BUF-035",
+        dt_nasc: ISODate("2022-07-13"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 73, temperatura: 38.5, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.529535", longitude: "-47.882535", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-036",
+      coleira_localizacao: "Pasto C",
+      IP: "10.12.27.136",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-036",
+        dt_nasc: ISODate("2024-01-20"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 71, temperatura: 38.4, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.530636", longitude: "-47.883636", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-037",
+      coleira_localizacao: "Pasto A",
+      IP: "10.12.27.137",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Jafarabadi",
+        n_etiqueta: "BUF-037",
+        dt_nasc: ISODate("2023-03-24"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 77, temperatura: 38.8, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Alerta", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.531737", longitude: "-47.884737", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-038",
+      coleira_localizacao: "Pasto B",
+      IP: "10.12.27.138",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Mediterrâneo",
+        n_etiqueta: "BUF-038",
+        dt_nasc: ISODate("2022-12-10"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 67, temperatura: 38.1, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.532838", longitude: "-47.885838", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-039",
+      coleira_localizacao: "Pasto E",
+      IP: "10.12.27.139",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-039",
+        dt_nasc: ISODate("2024-04-05"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 79, temperatura: 39.0, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.533939", longitude: "-47.886939", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-040",
+      coleira_localizacao: "Pasto F",
+      IP: "10.12.27.140",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Carabao",
+        n_etiqueta: "BUF-040",
+        dt_nasc: ISODate("2021-09-18"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 72, temperatura: 38.6, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.535040", longitude: "-47.888040", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-041",
+      coleira_localizacao: "Pasto D",
+      IP: "10.12.27.141",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-041",
+        dt_nasc: ISODate("2023-08-01"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 74, temperatura: 38.7, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.536141", longitude: "-47.889141", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-042",
+      coleira_localizacao: "Pasto C",
+      IP: "10.12.27.142",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Jafarabadi",
+        n_etiqueta: "BUF-042",
+        dt_nasc: ISODate("2022-03-29"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 70, temperatura: 38.3, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.537242", longitude: "-47.890242", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-043",
+      coleira_localizacao: "Pasto B",
+      IP: "10.12.27.143",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Mediterrâneo",
+        n_etiqueta: "BUF-043",
+        dt_nasc: ISODate("2023-11-12"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 83, temperatura: 39.4, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Estressado", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.538343", longitude: "-47.891343", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-044",
+      coleira_localizacao: "Pasto A",
+      IP: "10.12.27.144",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-044",
+        dt_nasc: ISODate("2024-05-19"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 73, temperatura: 38.5, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.539444", longitude: "-47.892444", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-045",
+      coleira_localizacao: "Pasto E",
+      IP: "10.12.27.145",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Carabao",
+        n_etiqueta: "BUF-045",
+        dt_nasc: ISODate("2021-12-04"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 76, temperatura: 38.7, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Alerta", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.540545", longitude: "-47.893545", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-046",
+      coleira_localizacao: "Pasto F",
+      IP: "10.12.27.146",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Jafarabadi",
+        n_etiqueta: "BUF-046",
+        dt_nasc: ISODate("2023-04-18"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 68, temperatura: 38.2, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.541646", longitude: "-47.894646", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-047",
+      coleira_localizacao: "Pasto D",
+      IP: "10.12.27.147",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-047",
+        dt_nasc: ISODate("2024-02-22"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 78, temperatura: 38.9, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.542747", longitude: "-47.895747", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-048",
+      coleira_localizacao: "Pasto C",
+      IP: "10.12.27.148",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Mediterrâneo",
+        n_etiqueta: "BUF-048",
+        dt_nasc: ISODate("2022-08-08"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 71, temperatura: 38.4, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.543848", longitude: "-47.896848", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-049",
+      coleira_localizacao: "Pasto B",
+      IP: "10.12.27.149",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Murrah",
+        n_etiqueta: "BUF-049",
+        dt_nasc: ISODate("2023-07-07"),
+        sexo: "Masculino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 75, temperatura: 38.6, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Alerta", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.544949", longitude: "-47.897949", ativo: true }]
+      }
+    },
+    {
+      _id: ObjectId(),
+      n_coleira: "COL-050",
+      coleira_localizacao: "Pasto A",
+      IP: "10.12.27.150",
+      ativo: true,
+      bubalino: {
+        _id: ObjectId(),
+        raca: "Jafarabadi",
+        n_etiqueta: "BUF-050",
+        dt_nasc: ISODate("2023-12-15"),
+        sexo: "Feminino",
+        ativo: true,
+        dados: [{ _id: ObjectId(), batimento_cardiaco: 69, temperatura: 38.3, ativo: true, data: new Date() }],
+        historico_estresse: [{ _id: ObjectId(), estado_estresse: "Ocioso", data_estresse: new Date(), ativo: true }],
+        localizacao: [{ _id: ObjectId(), latitude: "-24.546050", longitude: "-47.899050", ativo: true }]
       }
     }
   ]
 })
-
-
-// Adicionar nova coleira com um búfalo a um usuário existente
-
-db.usuarios.updateOne(
-  { _id: ObjectId("6529871f2d3e4a6b12345678") }, //id do usuário
-  {
-    $push: {
-      coleiras: {
-        _id: ObjectId(),
-        n_coleira: "2",
-        coleira_localizacao: "Pasto B",
-        IP: "10.12.27.40",
-        ativo: true,
-        bubalino: {
-          _id: ObjectId(),
-          nome: "Lorré",
-          raca: "Murrah",
-          n_etiqueta: "DCV14",
-          dt_nasc: ISODate("2023-05-10"),
-          sexo: "Masculino",
-          ativo: true,
-          dados: [],
-          historico_estresse: []
-        }
-      }
-    }
-  }
-)
-
-// Adicionar multiplas coleiras sem búfalos
-
-db.usuarios.updateOne(
-  { _id: ObjectId("6529871f2d3e4a6b12345678") },
-  {
-    $push: {
-      coleiras: {
-        $each: [
-          {
-            _id: ObjectId(),
-            n_coleira: "4",
-            coleira_localizacao: "Pasto D",
-            IP: "192.168.0.50",
-            ativo: true
-          },
-          {
-            _id: ObjectId(),
-            n_coleira: "5",
-            coleira_localizacao: "Pasto E",
-            IP: "192.168.0.51",
-            ativo: true
-          },
-          {
-            _id: ObjectId(),
-            n_coleira: "6",
-            coleira_localizacao: "Pasto F",
-            IP: "192.168.0.52",
-            ativo: true
-          }
-        ]
-      }
-    }
-  }
-)
-
-
-// Adicionar búfalo a uma coleira existente
-
-db.usuarios.updateOne(
-  { "coleiras.n_coleira": "5" },
-  {
-    $set: {
-      "coleiras.$.bubalino": {
-        _id: ObjectId(),
-        nome: "Zé Pequeno",
-        raca: "Murrah",
-        n_etiqueta: "XPZ22",
-        dt_nasc: ISODate("2024-07-15"),
-        sexo: "Masculino",
-        ativo: true,
-        dados: [],
-        historico_estresse: []
-      }
-    }
-  }
-)
-
-
-// desativar coleira (soft delete)
-
-db.usuarios.updateOne(
-  { "coleiras.n_coleira": "6" },
-  {
-    $set: { "coleiras.$.ativo": false }
-  }
-)
-
-// Atualização de dados da coleira
-
-db.usuarios.updateOne(
-  { "coleiras.n_coleira": "1" },
-  {
-    $set: {
-      "coleiras.$.IP": "10.12.27.99" // Atualizando o IP da coleira
-    }
-  }
-)
-
-
-// Atualização de dados do búfalo
-
-db.usuarios.updateOne(
-  { "coleiras.n_coleira": "1" },
-  {
-    $set: {
-      "coleiras.$.bubalino.nome": "José Atualizado",
-      "coleiras.$.bubalino.raca": "Murrah Puro"
-    }
-  }
-)
-
-// Remover búfalo (desativar, soft delete)
-
-db.usuarios.updateOne(
-  { "coleiras.n_coleira": "3" },
-  {
-    $set: {
-      "coleiras.$.bubalino.ativo": false
-    }
-  }
-)
-
-// Atualização de dados coletados da coleira 
-
-db.usuarios.updateOne(
-  { "coleiras.n_coleira": "1" },
-  {
-    $push: {
-      "coleiras.$.bubalino.dados": {
-        _id: ObjectId(),
-        batimento_cardiaco: 80,
-        temperatura: 39.1,
-        ativo: true,
-        data: new Date()
-      }
-    }
-  }
-)
-
-// Inserção de dados de estresse
-
-db.usuarios.updateOne(
-  { "coleiras.n_coleira": "1" },
-  {
-    $push: {
-      "coleiras.$.bubalino.historico_estresse": {
-        _id: ObjectId(),
-        estado_estresse: "Estressado",
-        data_estresse: new Date(),
-        ativo: true
-      }
-    }
-  }
-)
-
-
-
-// consulta geral
-
-db.usuarios.find().pretty()
