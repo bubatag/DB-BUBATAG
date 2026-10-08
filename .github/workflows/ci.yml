@@ -16,9 +16,6 @@ jobs:
       - name: Baixar código
         uses: actions/checkout@v4
 
-      - name: Construir imagem Docker
-        run: docker build -t bubatag-db ./banco-nao-relacional
-
       - name: Validar Docker Compose
         run: docker compose -f ./banco-nao-relacional/docker-compose.yml config
 
