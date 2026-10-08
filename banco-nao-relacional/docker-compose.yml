@@ -1,0 +1,13 @@
+services:
+  mongo:
+    image: mongo:8
+    container_name: bubatag-db
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./noSQLBD:/docker-entrypoint-initdb.d/noSQLBD:ro
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
+
+volumes:
+  mongo_data:
