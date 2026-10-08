@@ -1,0 +1,30 @@
+name: CI - Banco MongoDB
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Construir imagem Docker
+        run: docker build -t bubatag-db ./banco-nao-relacional
+
+      - name: Validar Docker Compose
+        run: docker compose -f ./banco-nao-relacional/docker-compose.yml config
+
+      - name: Testar banco MongoDB
+        run: |
+          docker compose -f ./banco-nao-relacional/docker-compose.yml up -d
+          sleep 10
+          docker exec bubatag-db mongosh bubatag --eval "print('USUARIOS:', db.usuarios.countDocuments())"
+          docker compose -f ./banco-nao-relacional/docker-compose.yml down -v
